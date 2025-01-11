@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm26f7mhst742"]
+
+[ext_resource type="PackedScene" uid="uid://sn7nkesyfsfi" path="res://players/player_1.tscn" id="1_xqsog"]
+[ext_resource type="PackedScene" uid="uid://b7eirq8uonhim" path="res://players/player_2.tscn" id="2_bwjg2"]
+[ext_resource type="PackedScene" uid="uid://lh8exmug47ko" path="res://players/ball.tscn" id="3_5nx2c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fk3oa"]
+size = Vector2(1462, 616)
+
+[node name="Game" type="Node2D"]
+
+[node name="Player1" parent="." instance=ExtResource("1_xqsog")]
+position = Vector2(43, 331)
+
+[node name="Player2" parent="." instance=ExtResource("2_bwjg2")]
+position = Vector2(1151, 311)
+
+[node name="Ball" parent="." instance=ExtResource("3_5nx2c")]
+position = Vector2(560, 293)
+collision_layer = 2
+
+[node name="GameArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea"]
+position = Vector2(628, 324)
+shape = SubResource("RectangleShape2D_fk3oa")
+
+[connection signal="body_exited" from="GameArea" to="Ball" method="_on_game_area_body_exited"]
