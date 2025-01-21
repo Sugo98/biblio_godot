@@ -9,10 +9,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED
-	move_and_slide()
-	#var collision = move_and_collide(velocity*delta)
-	#if collision:
-	#	direction.x *= -1
+	if move_and_collide(velocity*delta):
+		direction.x *= -1
 
 func reset_pallina() -> void:
 	position = Vector2(575, 320)
@@ -24,3 +22,7 @@ func _on_game_area_body_exited(body: Node2D) -> void:
 
 func bounce() ->void :
 	direction.y *= -1
+
+
+func _on_score_zone_1_body_entered(body: Node2D) -> void:
+	reset_pallina()

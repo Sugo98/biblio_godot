@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm26f7mhst742"]
+[gd_scene load_steps=7 format=3 uid="uid://dm26f7mhst742"]
 
 [ext_resource type="PackedScene" uid="uid://sn7nkesyfsfi" path="res://players/player_1.tscn" id="1_xqsog"]
 [ext_resource type="PackedScene" uid="uid://b7eirq8uonhim" path="res://players/player_2.tscn" id="2_bwjg2"]
 [ext_resource type="PackedScene" uid="uid://lh8exmug47ko" path="res://players/ball.tscn" id="3_5nx2c"]
+[ext_resource type="Script" path="res://score.gd" id="4_1pne6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fk3oa"]
 size = Vector2(1462, 616)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fov5"]
+size = Vector2(197.5, 691.5)
 
 [node name="Game" type="Node2D"]
 
@@ -26,4 +30,28 @@ collision_mask = 2
 position = Vector2(628, 324)
 shape = SubResource("RectangleShape2D_fk3oa")
 
+[node name="Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 589.0
+offset_top = 35.0
+offset_right = 640.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "HELLO"
+script = ExtResource("4_1pne6")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreZone1" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone1"]
+position = Vector2(1312, 311)
+shape = SubResource("RectangleShape2D_8fov5")
+debug_color = Color(0.578342, 0.552704, 0, 0.42)
+
 [connection signal="body_exited" from="GameArea" to="Ball" method="_on_game_area_body_exited"]
+[connection signal="body_entered" from="ScoreZone1" to="Ball" method="_on_score_zone_1_body_entered"]
+[connection signal="body_entered" from="ScoreZone1" to="Score" method="player1_score"]
