@@ -19,3 +19,7 @@ func _process(delta: float) -> void:
 func player1_score(_body):
 	score_p1 += 1
 	update_score()
+
+func player2_score(_body):
+	score_p2 += 1
+	update_score()

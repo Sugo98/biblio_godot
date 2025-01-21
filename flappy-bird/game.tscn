@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwdyj08yvv3c6"]
+
+[ext_resource type="PackedScene" uid="uid://bcl7cr760mymq" path="res://bird.tscn" id="1_rl0r0"]
+[ext_resource type="Script" path="res://tube_generator.gd" id="2_kboy8"]
+[ext_resource type="PackedScene" uid="uid://dwrvsyi035p3p" path="res://tube.tscn" id="3_0gca6"]
+[ext_resource type="PackedScene" uid="uid://0hm5k67ub1m3" path="res://menu.tscn" id="4_fbvnl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rcan"]
+size = Vector2(53, 655)
+
+[node name="Game" type="Node"]
+
+[node name="Bird" parent="." instance=ExtResource("1_rl0r0")]
+position = Vector2(533, 337)
+
+[node name="TubeGenerator" type="Node2D" parent="." node_paths=PackedStringArray("generator_timer")]
+script = ExtResource("2_kboy8")
+tube_scene = ExtResource("3_0gca6")
+generator_timer = NodePath("../Timer")
+
+[node name="Menu" parent="." instance=ExtResource("4_fbvnl")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(395.5, 317.5)
+shape = SubResource("RectangleShape2D_0rcan")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="termina_gioco" from="Bird" to="TubeGenerator" method="_on_bird_termina_gioco"]
+[connection signal="termina_gioco" from="Bird" to="Menu" method="_on_bird_termina_gioco"]
+[connection signal="avvia_gioco" from="Menu" to="Bird" method="posizione_di_partenza"]
+[connection signal="avvia_gioco" from="Menu" to="TubeGenerator" method="inizia_generazione_tubi"]
+[connection signal="body_entered" from="Area2D" to="Bird" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="TubeGenerator" method="create_tube"]

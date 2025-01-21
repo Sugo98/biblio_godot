@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwrvsyi035p3p"]
+
+[ext_resource type="Script" path="res://tube.gd" id="1_6n1te"]
+[ext_resource type="Texture2D" uid="uid://xmrypapyr0v6" path="res://white.png" id="2_jtkbc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fawh7"]
+size = Vector2(111, 649.5)
+
+[node name="Tube" type="CharacterBody2D"]
+script = ExtResource("1_6n1te")
+initial_position = Vector2(1240, 320)
+random_range = 150.0
+speed = Vector2(-200, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, -489)
+scale = Vector2(112, 652)
+texture = ExtResource("2_jtkbc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-3.5, 495)
+scale = Vector2(115, 652)
+texture = ExtResource("2_jtkbc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 494.75)
+shape = SubResource("RectangleShape2D_fawh7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -490)
+shape = SubResource("RectangleShape2D_fawh7")

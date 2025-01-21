@@ -48,10 +48,20 @@ metadata/_edit_use_anchors_ = true
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone1"]
-position = Vector2(1312, 311)
+position = Vector2(1280, 311)
+shape = SubResource("RectangleShape2D_8fov5")
+debug_color = Color(0.578342, 0.552704, 0, 0.42)
+
+[node name="ScoreZone2" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreZone2"]
+position = Vector2(-119, 311)
 shape = SubResource("RectangleShape2D_8fov5")
 debug_color = Color(0.578342, 0.552704, 0, 0.42)
 
 [connection signal="body_exited" from="GameArea" to="Ball" method="_on_game_area_body_exited"]
 [connection signal="body_entered" from="ScoreZone1" to="Ball" method="_on_score_zone_1_body_entered"]
 [connection signal="body_entered" from="ScoreZone1" to="Score" method="player1_score"]
+[connection signal="body_entered" from="ScoreZone2" to="Ball" method="_on_score_zone_1_body_entered"]
+[connection signal="body_entered" from="ScoreZone2" to="Score" method="player2_score"]
